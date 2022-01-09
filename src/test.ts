@@ -7,6 +7,32 @@ import {
   platformBrowserDynamicTesting
 } from '@angular/platform-browser-dynamic/testing';
 
+//Attempt to mock global $localize function.
+import Spy = jasmine.Spy;
+import createSpy = jasmine.createSpy;
+
+// tslint:disable-next-line:variable-name 
+const _global: any = typeof global !== 'undefined' && global;
+const defaultFakedLocalizeTranslate: (messageParts: TemplateStringsArray, substitutions: readonly any[]) => [TemplateStringsArray, readonly any[]] =
+  (messageParts: TemplateStringsArray, substitutions: readonly any[]) => {
+    console.log(messageParts);
+    console.log(substitutions);
+    return [messageParts, substitutions];
+  };
+
+export interface TranslateFn {
+  (messageParts: TemplateStringsArray,
+    expressions: readonly any[]): [TemplateStringsArray, readonly any[]];
+}
+
+_global.mockLocalize = createSpy('mockLocalize') as Spy;
+
+declare global {
+  const mockLocalize: Spy;
+}
+
+$localize.translate = mockLocalize.and.callFake(defaultFakedLocalizeTranslate);
+
 declare const require: {
   context(path: string, deep?: boolean, filter?: RegExp): {
     keys(): string[];
