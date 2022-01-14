@@ -15,8 +15,6 @@ import createSpy = jasmine.createSpy;
 const _global: any = typeof global !== 'undefined' && global;
 const defaultFakedLocalizeTranslate: (messageParts: TemplateStringsArray, substitutions: readonly any[]) => [TemplateStringsArray, readonly any[]] =
   (messageParts: TemplateStringsArray, substitutions: readonly any[]) => {
-    console.log(messageParts);
-    console.log(substitutions);
     return [messageParts, substitutions];
   };
 

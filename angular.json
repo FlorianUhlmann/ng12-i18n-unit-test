@@ -1,5 +1,8 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": "2cb029f6-4b89-4ab7-963d-471b7247729b"
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -8,6 +11,12 @@
       "schematics": {
         "@schematics/angular:application": {
           "strict": true
+        }
+      },
+      "i18n": {
+        "sourceLocale": "en-US",
+        "locales": {
+          "en": "messages.en.xlf"
         }
       },
       "root": "",
@@ -29,9 +38,20 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "localize": true
           },
           "configurations": {
+            "en-US": {
+              "localize": [
+                "en-US"
+              ]
+            },
+            "en": {
+              "localize": [
+                "en"
+              ]
+            },
             "production": {
               "budgets": [
                 {
